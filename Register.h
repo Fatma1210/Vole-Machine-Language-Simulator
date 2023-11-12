@@ -10,7 +10,7 @@ using namespace std ;
     public:
         Register() ;
         Register(long address , long value) ;
-        void Set_Value (long val) ;
+        void Set_Value (long value) ;
         long Get_Value() ;
     };
 
