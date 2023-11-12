@@ -5,13 +5,12 @@ using namespace std ;
 #define VOLEMACHINELANGUAGESIMULATOR_REGISTER_H
     class Register {
     private:
-        static int counter ;
         map < long , long > Register_Container ;
     public:
         Register() ;
         Register(long address , long value) ;
-        void Set_Value (long value) ;
-        long Get_Value() ;
+        void Set_Value (long address , long value) ;
+        long Get_Value(long address) ;
     };
 
 
