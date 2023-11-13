@@ -9,7 +9,7 @@ private:
 
 public:
     Memory(int size) : data(size, 0);
-    int read(long address);
+    long read(long address);
     void write(long address, long value);
 };
 #endif
