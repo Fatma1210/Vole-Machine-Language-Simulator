@@ -4,7 +4,7 @@ using namespace std ;
 
 Memory::Memory(int size) : data(size, 0) {}
 
-Memory::int read(long address){
+Memory::long read(long address){
   if (address >= 0 && address < data.size()) {
       return data[address];
   } else {
