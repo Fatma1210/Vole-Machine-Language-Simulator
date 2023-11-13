@@ -11,4 +11,5 @@ public:
     Memory(int size) : data(size, 0);
     void read(long address);
     void write(int address, int value);
-}
+};
+#endif
