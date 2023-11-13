@@ -5,11 +5,11 @@
 using namespace std;
 class Memory{
 private:
-    vector<int> data;
+    vector<long> data;
 
 public:
     Memory(int size) : data(size, 0);
     int read(long address);
-    void write(int address, int value);
+    void write(long address, long value);
 };
 #endif
