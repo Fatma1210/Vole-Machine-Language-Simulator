@@ -65,6 +65,9 @@ void Machine :: operations(long n, long x, long y) {
             M.lode(y,s);
             break;
         }
+       case 12:{
+          break;
+       }
     }
 }
 
