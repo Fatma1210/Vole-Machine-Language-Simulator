@@ -55,7 +55,8 @@ void Machine :: operations(long n, long x, long y) {
             break;
         }
         case 2:{
-            R.load(x,y);
+            long converted=convert(y);
+            R.load(x,converted);
             break;
         }
         case 3:{
