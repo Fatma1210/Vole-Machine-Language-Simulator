@@ -8,7 +8,7 @@ private:
     vector<long> data;
 
 public:
-    Memory(int size) : data(size, 0);
+    Memory: data(256, 0);
     long read(long address);
     void write(long address, long value);
 };
