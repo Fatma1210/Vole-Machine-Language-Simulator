@@ -19,6 +19,9 @@ public:
     long convert(string);
     void operations(long, long, long );
     long get_counter();
+    void Load(long address_of_R , long address_of_XY ) ;
+    void Move(long address_of_R , long address_of_S) ;
+    void JUMP(long address_of_R , long address_of_XY ) ;
 };
 
 #endif //MACHINE_H
