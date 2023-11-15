@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Memory.h"
 using namespace std ;
-Memory::Memory(int size) : data(size, 0) {}
+Memory::Memory : data(256, 0) {}
 
 long Memory:: read(long address){
     if (address >= 0 && address < data.size()) {
