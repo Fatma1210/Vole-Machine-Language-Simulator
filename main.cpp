@@ -1,8 +1,14 @@
-#include <iostream>
-#include <vector>
-using namespace std ;
+#include <bits/stdc++.h>
+#include "Memory.h"
+#include "Machine.h"
+#include "Register.h"
+using namespace std;
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+int main(){
+    cout << "Welcome to our Machine Simulator Program\n";
+    cout << "Enter the file name :\n";
+    string name;
+    cin >> name;
+    Machine x;
+    x.open(name);
 }
