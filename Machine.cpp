@@ -83,6 +83,14 @@ void Machine :: operations(long Instruction , long Register_address , long XY) {
             Move(s , t) ;
             break;
         }
+        case 5 : {
+            long s=XY/16;
+            long t=XY-(s*16);
+            long num1=R.Get_Value(s);
+            long num2=R.Get_Value(t);
+            long sum=num1+num2;
+            R.Set_Value(r,sum);
+        }
         case 11:{
             JUMP(Register_address, XY);
         }
