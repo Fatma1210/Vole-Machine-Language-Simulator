@@ -4,7 +4,7 @@
 #include "Memory.h"
 using namespace std;
 
-Machine :: Machine() {
+Machine ::Machine(Memory m) : M(m) {
     counter = -1;
 }
 void Machine :: open(string file_name) {
@@ -40,11 +40,11 @@ void Machine :: open(string file_name) {
 }
 void Machine :: work() {
     for(step = 0; step < counter; step+=2){
-         op = M.read(step)/16;
-         long val = M.read(step);
-         r = val-(op*16);
-         m = M.read(step+1);
-         operations(op,r, m);
+        op = M.read(step)/16;
+        long val = M.read(step);
+        r = val-(op*16);
+        m = M.read(step+1);
+        operations(op,r, m);
     }
 }
 long Machine :: convert(string s) {
@@ -60,14 +60,13 @@ void Machine :: Load(long address_of_R , long address_of_XY ){
 void  Machine :: Move(long address_of_R , long address_of_S){
     long val = R.Get_Value(address_of_R) ;
     R.Set_Value(address_of_S , val) ;
- //   Reg.Remove_Register(address_of_R) ;
 }
 
 void Machine :: JUMP(long address_of_R , long address_of_XY ) {
     long value_Of_R0 = R.Get_Value(0);
     long value_of_R = R.Get_Value(address_of_R);
     if (value_of_R == value_Of_R0) {
-       // M.read( address_of_XY);
+         M.read( address_of_XY);
     }
 }
 long Machine :: Screen() {
@@ -112,5 +111,4 @@ void Machine :: operations(long Instruction , long Register_address , long XY) {
         }
     }
 }
-
 
