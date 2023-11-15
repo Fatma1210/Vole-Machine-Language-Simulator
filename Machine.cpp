@@ -29,9 +29,9 @@ void Machine :: open(string file_name) {
                 v[c] = line.substr(indx,i-indx+1);
             }
         }
-        M.lode(counter, v[0]+v[1]);
+        M.write(counter, convert(v[0]+v[1]));
         counter++;
-        M.lode(counter, v[2]);
+        M.write(counter, convert(v[2]));
         op = convert(v[0]);
         r = convert(v[1]);
         m = convert(v[2]);
@@ -48,43 +48,43 @@ long Machine:: get_counter(){
     return counter;
 }
 void Machine :: Load(long address_of_R , long address_of_XY ){
-    Register Reg ;
-    long val = Reg.Get_Value(address_of_XY) ;
-    Reg.Set_Value(address_of_R , val) ;
+    long val = R.Get_Value(address_of_XY) ;
+    R.Set_Value(address_of_R , val) ;
 }
 void  Machine :: Move(long address_of_R , long address_of_S){
-    Register Reg ;
-    long val = Reg.Get_Value(address_of_R) ;
-    Reg.Set_Value(address_of_S , val) ;
-    Reg.Remove_Register(address_of_R) ;
+    long val = R.Get_Value(address_of_R) ;
+    R.Set_Value(address_of_S , val) ;
+ //   Reg.Remove_Register(address_of_R) ;
 }
 void Machine :: JUMP(long address_of_R , long address_of_XY ) {
-    Register Reg;
-    Memory Mem;
-    long value_Of_R0 = Reg.Get_Value(0);
-    long value_of_R = Reg.Get_Value(address_of_R);
+    long value_Of_R0 = R.Get_Value(0);
+    long value_of_R = R.Get_Value(address_of_R);
     if (value_of_R == value_Of_R0) {
-        Mem.Get_Instruction(long address_of_XY);
+        M.read( address_of_XY);
     }
 }
 void Machine :: operations(long Instruction , long Register_address , long XY) {
     switch (Instruction) {
         case 1:{
-            ::Load(Register_address , XY) ;
+            Load(Register_address , XY) ;
         }
         case 2:{
-            long converted=convert(y);
-            R.load(x,converted);
+            R.Set_Value(Register_address,XY);
             break;
         }
         case 3:{
-            long l = R.get(x);
-            string s = to_string(l);
-            M.lode(y,s);
+            long l = R.Get_Value(Register_address);
+            M.write(XY,l);
             break;
         }
         case 4 : {
-            Machine::Move(Register_address , XY) ;
+            long s = XY/16;
+            long t = XY-(s*16);
+            Move(s , t) ;
+            break;
+        }
+        case 11:{
+            JUMP(Register_address, XY);
         }
         case 12:{
             break;
