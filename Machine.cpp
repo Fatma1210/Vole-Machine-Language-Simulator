@@ -5,7 +5,7 @@
 using namespace std;
 
 Machine :: Machine() {
-   counter = -1;
+    counter = -1;
 }
 void Machine :: open(string file_name) {
     ifstream f(file_name);
@@ -47,12 +47,30 @@ long Machine :: convert(string s) {
 long Machine:: get_counter(){
     return counter;
 }
-void Machine :: operations(long n, long x, long y) {
-    switch (n) {
+void Machine :: Load(long address_of_R , long address_of_XY ){
+    Register Reg ;
+    long val = Reg.Get_Value(address_of_XY) ;
+    Reg.Set_Value(address_of_R , val) ;
+}
+void  Machine :: Move(long address_of_R , long address_of_S){
+    Register Reg ;
+    long val = Reg.Get_Value(address_of_R) ;
+    Reg.Set_Value(address_of_S , val) ;
+    Reg.Remove_Register(address_of_R) ;
+}
+void Machine :: JUMP(long address_of_R , long address_of_XY ) {
+    Register Reg;
+    Memory Mem;
+    long value_Of_R0 = Reg.Get_Value(0);
+    long value_of_R = Reg.Get_Value(address_of_R);
+    if (value_of_R == value_Of_R0) {
+        Mem.Get_Instruction(long address_of_XY);
+    }
+}
+void Machine :: operations(long Instruction , long Register_address , long XY) {
+    switch (Instruction) {
         case 1:{
-            long l = convert(M.get(y));
-            R.load(x,l);
-            break;
+            ::Load(Register_address , XY) ;
         }
         case 2:{
             long converted=convert(y);
@@ -65,9 +83,12 @@ void Machine :: operations(long n, long x, long y) {
             M.lode(y,s);
             break;
         }
-       case 12:{
-          break;
-       }
+        case 4 : {
+            Machine::Move(Register_address , XY) ;
+        }
+        case 12:{
+            break;
+        }
     }
 }
 
