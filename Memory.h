@@ -5,7 +5,7 @@
 using namespace std;
 class Memory{
 private:
-    vector<long> data(256,0);
+    long data [256];
 
 public:
     long read(long address);
