@@ -29,18 +29,24 @@ void Machine :: open(string file_name) {
                 v[c] = line.substr(indx,i-indx+1);
             }
         }
-        M.write(counter, convert(v[0]+v[1]));
+
+        string s = v[0]+v[1].back();
+        M.write(counter, convert(s));
         counter++;
         M.write(counter, convert(v[2]));
-        op = convert(v[0]);
-        r = convert(v[1]);
-        m = convert(v[2]);
-        operations(op,r, m);
     }
     f.close();
 
 }
-
+void Machine :: work() {
+    for(step = 0; step < counter; step+=2){
+         op = M.read(step)/16;
+         long val = M.read(step);
+         r = val-(op*16);
+         m = M.read(step+1);
+         operations(op,r, m);
+    }
+}
 long Machine :: convert(string s) {
     return stol(s, nullptr, 16);
 }
@@ -56,15 +62,16 @@ void  Machine :: Move(long address_of_R , long address_of_S){
     R.Set_Value(address_of_S , val) ;
  //   Reg.Remove_Register(address_of_R) ;
 }
+
 void Machine :: JUMP(long address_of_R , long address_of_XY ) {
     long value_Of_R0 = R.Get_Value(0);
     long value_of_R = R.Get_Value(address_of_R);
     if (value_of_R == value_Of_R0) {
-        M.read( address_of_XY);
+       // M.read( address_of_XY);
     }
 }
-void Machine :: Screen() {
-    cout << M.read(0);
+long Machine :: Screen() {
+    return M.read(0);
 }
 void Machine :: operations(long Instruction , long Register_address , long XY) {
     switch (Instruction) {
@@ -100,9 +107,10 @@ void Machine :: operations(long Instruction , long Register_address , long XY) {
             break;
         }
         case 12:{
-            cout << "HALT" << endl;
-            break;
+            cout << "Finished" << endl;
+            return;
         }
     }
 }
+
 
