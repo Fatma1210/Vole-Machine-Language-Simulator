@@ -63,10 +63,14 @@ void Machine :: JUMP(long address_of_R , long address_of_XY ) {
         M.read( address_of_XY);
     }
 }
+void Machine :: Screen() {
+    cout << M.read(0);
+}
 void Machine :: operations(long Instruction , long Register_address , long XY) {
     switch (Instruction) {
         case 1:{
             Load(Register_address , XY) ;
+            break;
         }
         case 2:{
             R.Set_Value(Register_address,XY);
@@ -89,12 +93,14 @@ void Machine :: operations(long Instruction , long Register_address , long XY) {
             long num1=R.Get_Value(s);
             long num2=R.Get_Value(t);
             long sum=num1+num2;
-            R.Set_Value(r,sum);
+            R.Set_Value(Register_address,sum);
         }
         case 11:{
             JUMP(Register_address, XY);
+            break;
         }
         case 12:{
+            cout << "HALT" << endl;
             break;
         }
     }
