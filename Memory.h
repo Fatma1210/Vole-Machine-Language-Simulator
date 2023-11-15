@@ -5,10 +5,9 @@
 using namespace std;
 class Memory{
 private:
-    vector<long> data;
+    vector<long> data(256,0);
 
 public:
-    Memory: data(256, 0);
     long read(long address);
     void write(long address, long value);
 };
